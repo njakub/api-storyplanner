@@ -41,8 +41,8 @@ public class ActorCharacter {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
 	private Date dob;
 
-	@OneToOne(mappedBy = "actorCharacter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private ActorCharacterAppearance characterAppearance;
+	@OneToOne(mappedBy = "actorCharacter", cascade = CascadeType.ALL)
+	private ActorCharacterAppearance actorCharacterAppearance;
 
 	@ManyToOne
 	@JoinColumn(name = "story_project_id")
@@ -161,12 +161,12 @@ public class ActorCharacter {
 		this.title = title;
 	}
 
-	public ActorCharacterAppearance getcharacterAppearance() {
-		return this.characterAppearance;
+	public ActorCharacterAppearance getActorCharacterAppearance() {
+		return this.actorCharacterAppearance;
 	}
 
-	public void setCharacterAppearance(ActorCharacterAppearance characterAppearance) {
-		this.characterAppearance = characterAppearance;
+	public void setActorCharacterAppearance(ActorCharacterAppearance actorCharacterAppearance) {
+		this.actorCharacterAppearance = actorCharacterAppearance;
 	}
 
 }

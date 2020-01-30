@@ -1,5 +1,6 @@
 package com.java.storyplanner.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,13 +13,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.java.storyplanner.models.StoryProject;
 import com.java.storyplanner.services.StoryProjectService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/v1/story-projects")
+@RequestMapping("/api/v1/projects")
 public class StoryProjectController {
 
     @Autowired
@@ -32,8 +37,13 @@ public class StoryProjectController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void create(@RequestBody StoryProject storyProject) {
+    public ResponseEntity create(@RequestBody String storyProjectJson)
+            throws JsonParseException, JsonMappingException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        StoryProject storyProject = mapper.readValue(storyProjectJson, StoryProject.class);
         storyProjectService.saveOrUpdate(storyProject);
+
+        return new ResponseEntity<>("fdsfds", HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

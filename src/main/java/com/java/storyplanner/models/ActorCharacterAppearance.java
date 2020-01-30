@@ -27,7 +27,7 @@ public class ActorCharacterAppearance {
     private boolean wearsGlasses;
     private String levelOfGrooming;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "actor_character_id")
     @JsonIgnore
     private ActorCharacter actorCharacter;
